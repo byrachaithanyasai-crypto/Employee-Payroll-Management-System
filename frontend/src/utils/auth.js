@@ -1,0 +1,39 @@
+// RBAC Utilities
+export const ROLES = {
+  ADMIN: 'ADMIN',
+  HR: 'HR',
+  MANAGER: 'MANAGER'
+};
+
+export const PERMISSIONS = {
+  DASHBOARD_FULL: 'DASHBOARD_FULL',
+  EMPLOYEES_CREATE: 'EMPLOYEES_CREATE',
+  EMPLOYEES_EDIT: 'EMPLOYEES_EDIT',
+  EMPLOYEES_DELETE: 'EMPLOYEES_DELETE',
+  PAYROLL_PROCESS: 'PAYROLL_PROCESS',
+  PAYROLL_EDIT: 'PAYROLL_EDIT',
+  USERS_VIEW: 'USERS_VIEW',
+  USERS_CREATE: 'USERS_CREATE',
+  USERS_DELETE: 'USERS_DELETE',
+  SETTINGS_ADMIN: 'SETTINGS_ADMIN'
+};
+
+const ROLE_PERMISSIONS = {
+  [ROLES.ADMIN]: Object.values(PERMISSIONS),
+  [ROLES.HR]: [
+    PERMISSIONS.EMPLOYEES_CREATE,
+    PERMISSIONS.EMPLOYEES_EDIT,
+    PERMISSIONS.PAYROLL_PROCESS,
+    PERMISSIONS.PAYROLL_EDIT,
+    PERMISSIONS.USERS_VIEW
+  ],
+  [ROLES.MANAGER]: [
+    PERMISSIONS.USERS_VIEW // Very restricted
+  ]
+};
+
+export const hasPermission = (role, permission) => {
+  const normalizedRole = String(role).toUpperCase();
+  const permissions = ROLE_PERMISSIONS[normalizedRole] || [];
+  return permissions.includes(permission);
+};

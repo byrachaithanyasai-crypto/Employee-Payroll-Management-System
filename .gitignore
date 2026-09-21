@@ -1,0 +1,25 @@
+# Application data
+data/*.dat
+data/*.log
+
+# Frontend dependencies
+frontend/node_modules/
+frontend/dist/
+
+# Build outputs
+*.exe
+*.o
+*.obj
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# IDE
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
