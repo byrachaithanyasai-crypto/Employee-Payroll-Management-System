@@ -16,7 +16,7 @@ export default function Settings() {
     const fetchSettings = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await axios.get('http://localhost:8080/api/settings', {
+        const res = await axios.get('http://https://employee-payroll-management-system-lj0a.onrender.com/api/settings', {
           headers: { Authorization: `Bearer ${token}` }
         });
         setSettings(res.data);
@@ -39,7 +39,7 @@ export default function Settings() {
     setSaving(true);
     try {
       const token = localStorage.getItem('token');
-      await axios.post('http://localhost:8080/api/settings', settings, {
+      await axios.post('http://https://employee-payroll-management-system-lj0a.onrender.com/api/settings', settings, {
         headers: { Authorization: `Bearer ${token}` }
       });
       showToast('success', 'Settings updated successfully.');

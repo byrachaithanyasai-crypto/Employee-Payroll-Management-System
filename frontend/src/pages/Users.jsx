@@ -18,7 +18,7 @@ export default function Users() {
   const fetchUsers = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.get('http://localhost:8080/api/users', { headers: { Authorization: `Bearer ${token}` } });
+      const res = await axios.get('http://https://employee-payroll-management-system-lj0a.onrender.com/api/users', { headers: { Authorization: `Bearer ${token}` } });
       setUsers(res.data);
     } catch (err) {
       console.error(err);
@@ -40,7 +40,7 @@ export default function Users() {
     setSubmitting(true);
     try {
       const token = localStorage.getItem('token');
-      await axios.post('http://localhost:8080/api/users', newUser, { headers: { Authorization: `Bearer ${token}` } });
+      await axios.post('http://https://employee-payroll-management-system-lj0a.onrender.com/api/users', newUser, { headers: { Authorization: `Bearer ${token}` } });
       showToast('success', 'User account created');
       setShowModal(false);
       setNewUser({ username: '', password: '', role: 'HR' });
@@ -55,7 +55,7 @@ export default function Users() {
     if (!window.confirm(`Delete user '${username}'? Employee records are not affected.`)) return;
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:8080/api/users/${username}`, { headers: { Authorization: `Bearer ${token}` } });
+      await axios.delete(`http://https://employee-payroll-management-system-lj0a.onrender.com/api/users/${username}`, { headers: { Authorization: `Bearer ${token}` } });
       showToast('success', 'User deleted successfully');
       fetchUsers();
     } catch (err) {

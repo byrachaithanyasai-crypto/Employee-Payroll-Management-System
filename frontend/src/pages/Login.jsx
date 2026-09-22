@@ -15,7 +15,7 @@ export default function Login() {
     setError('');
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:8080/api/login', { username, password });
+      const res = await axios.post('http://https://employee-payroll-management-system-lj0a.onrender.com/api/login', { username, password });
       if (res.data.status === 'success') {
         localStorage.setItem('token', res.data.token);
         localStorage.setItem('role', res.data.role);

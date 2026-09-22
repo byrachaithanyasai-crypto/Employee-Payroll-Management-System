@@ -23,7 +23,7 @@ export default function Employees() {
   const fetchEmployees = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.get('http://localhost:8080/api/employees', { headers: { Authorization: `Bearer ${token}` } });
+      const res = await axios.get('http://https://employee-payroll-management-system-lj0a.onrender.com/api/employees', { headers: { Authorization: `Bearer ${token}` } });
       setEmployees(res.data);
     } catch (err) {
       console.error(err);
@@ -56,10 +56,10 @@ export default function Employees() {
       };
 
       if (modalMode === 'add') {
-        await axios.post('http://localhost:8080/api/employees', payload, config);
+        await axios.post('http://https://employee-payroll-management-system-lj0a.onrender.com/api/employees', payload, config);
         showToast('success', 'Employee added successfully');
       } else {
-        await axios.put(`http://localhost:8080/api/employees/${currentEmp.id}`, payload, config);
+        await axios.put(`http://https://employee-payroll-management-system-lj0a.onrender.com/api/employees/${currentEmp.id}`, payload, config);
         showToast('success', 'Employee updated successfully');
       }
       setShowModal(false);
@@ -74,7 +74,7 @@ export default function Employees() {
     if (!window.confirm("Delete this employee? This will also remove their payroll records.")) return;
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:8080/api/employees/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+      await axios.delete(`http://https://employee-payroll-management-system-lj0a.onrender.com/api/employees/${id}`, { headers: { Authorization: `Bearer ${token}` } });
       showToast('success', 'Employee deleted');
       fetchEmployees();
     } catch (err) {

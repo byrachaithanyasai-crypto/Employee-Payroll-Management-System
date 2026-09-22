@@ -17,8 +17,8 @@ export default function Dashboard() {
         
         // Fetch real metrics
         const [empRes, usersRes] = await Promise.all([
-          axios.get('http://localhost:8080/api/employees', config).catch(() => ({ data: [] })),
-          axios.get('http://localhost:8080/api/users', config).catch(() => ({ data: [] }))
+          axios.get('http://https://employee-payroll-management-system-lj0a.onrender.com/api/employees', config).catch(() => ({ data: [] })),
+          axios.get('http://https://employee-payroll-management-system-lj0a.onrender.com/api/users', config).catch(() => ({ data: [] }))
         ]);
         
         const totalSalary = empRes.data.reduce((sum, e) => sum + (parseFloat(e.basicSalary) || 0), 0);

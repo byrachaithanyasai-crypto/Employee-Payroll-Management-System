@@ -16,7 +16,7 @@ export default function Payroll() {
   const fetchPayroll = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.get('http://localhost:8080/api/payroll', { headers: { Authorization: `Bearer ${token}` } });
+      const res = await axios.get('http://https://employee-payroll-management-system-lj0a.onrender.com/api/payroll', { headers: { Authorization: `Bearer ${token}` } });
       setPayroll(res.data);
     } catch (err) {
       console.error(err);
@@ -38,7 +38,7 @@ export default function Payroll() {
     setProcessing(true);
     try {
       const token = localStorage.getItem('token');
-      await axios.post('http://localhost:8080/api/payroll/process', {}, { headers: { Authorization: `Bearer ${token}` } });
+      await axios.post('http://https://employee-payroll-management-system-lj0a.onrender.com/api/payroll/process', {}, { headers: { Authorization: `Bearer ${token}` } });
       showToast('success', 'Payroll processed successfully');
       fetchPayroll();
     } catch (err) {
