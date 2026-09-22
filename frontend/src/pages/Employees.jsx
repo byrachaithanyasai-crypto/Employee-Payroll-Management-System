@@ -168,7 +168,7 @@ export default function Employees() {
                       ${parseFloat(emp.basicSalary).toLocaleString(undefined, {minimumFractionDigits: 2})}
                     </td>
                     {(canEdit || canDelete) && (
-                      <td className="px-6 py-4 whitespace-nowrap text-right space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <td className="px-6 py-4 whitespace-nowrap text-right space-x-2 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
                         {canEdit && (
                           <button onClick={() => { setModalMode('edit'); setCurrentEmp(emp); setShowModal(true); }} className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
                             <Edit2 size={16} />

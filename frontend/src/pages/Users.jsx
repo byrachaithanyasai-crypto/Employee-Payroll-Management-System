@@ -113,7 +113,7 @@ export default function Users() {
                   </div>
                 </div>
                 {canDelete && (
-                  <button onClick={() => handleDelete(u.username)} className="p-2 text-slate-300 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors opacity-0 group-hover:opacity-100">
+                  <button onClick={() => handleDelete(u.username)} className="p-2 text-slate-300 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors md:opacity-0 group-hover:opacity-100">
                     <Trash2 size={18} />
                   </button>
                 )}

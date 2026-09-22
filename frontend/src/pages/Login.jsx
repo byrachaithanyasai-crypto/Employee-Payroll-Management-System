@@ -58,7 +58,19 @@ export default function Login() {
       {/* Right Panel - Login Form */}
       <div className="w-full lg:w-1/2 flex items-center justify-center p-8 sm:p-12">
         <div className="w-full max-w-md space-y-8">
+          
           <div className="text-center lg:text-left">
+            {/* Mobile-only branding area */}
+            <div className="lg:hidden flex flex-col items-center mb-8">
+              <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-600/20 mb-4 relative">
+                <Shield className="text-white w-6 h-6 z-10" />
+                <div className="absolute inset-0 bg-gradient-to-tr from-blue-600 to-blue-400 rounded-xl"></div>
+                <Shield className="text-white w-6 h-6 z-10 absolute" />
+              </div>
+              <h1 className="text-xl font-bold text-slate-900 leading-tight">EPMS</h1>
+              <div className="h-1 w-8 bg-blue-600 rounded-full mt-3 opacity-80"></div>
+            </div>
+
             <h2 className="text-3xl font-bold text-slate-900 tracking-tight">Sign In</h2>
             <p className="mt-2 text-slate-500">Enter your credentials to access the system</p>
           </div>
