@@ -40,23 +40,42 @@ void set_cors(httplib::Response& res) {
     res.set_header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
     res.set_header("Access-Control-Allow-Headers", "Content-Type, Authorization");
 }
+std::string get_role(
+    const httplib::Request& req,
+    const std::map<std::string, User>& appUsers,
+    std::string* outUsername
+) {
+    std::string authHeader =
+        req.has_header("Authorization")
+        ? req.get_header_value("Authorization")
+        : "";
 
-std::string get_role(const httplib::Request& req, const std::map<std::string, User>& appUsers, std::string* outUsername = nullptr) {
-    std::string authHeader = req.has_header("Authorization") ? req.get_header_value("Authorization") : "";
     std::string currentUser = "";
     std::string currentRole = "";
-    
+
     if (authHeader.find("Bearer ") == 0) {
         std::string token = authHeader.substr(7);
+
         if (activeSessions.find(token) != activeSessions.end()) {
             currentUser = activeSessions[token];
+
             if (appUsers.find(currentUser) != appUsers.end()) {
                 currentRole = appUsers.at(currentUser).role;
-                if (outUsername) *outUsername = currentUser;
+
+                if (outUsername) {
+                    *outUsername = currentUser;
+                }
             }
         }
     }
-    std::transform(currentRole.begin(), currentRole.end(), currentRole.begin(), ::toupper);
+
+    std::transform(
+        currentRole.begin(),
+        currentRole.end(),
+        currentRole.begin(),
+        ::toupper
+    );
+
     return currentRole;
 }
 
