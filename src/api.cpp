@@ -34,27 +34,20 @@ std::string generateSessionToken() {
 
     return token;
 }
-std::string generateSessionToken() {
-    const char alphanum[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    std::string tmp_s(32, '0');
-    
-    unsigned char random_bytes[32];
-    NTSTATUS status = BCryptGenRandom(
-        NULL,
-        random_bytes,
-        sizeof(random_bytes),
-        BCRYPT_USE_SYSTEM_PREFERRED_RNG
-    );
 
-    if (status != 0) { // 0 is STATUS_SUCCESS
-        throw std::runtime_error("Failed to generate secure token");
-    }
+std::string generateSessionToken() {
+    const char alphanum[] =
+        "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
+    std::string token(32, '0');
+
+    std::random_device rd;
 
     for (int i = 0; i < 32; ++i) {
-        tmp_s[i] = alphanum[random_bytes[i] % 62];
+        token[i] = alphanum[rd() % 62];
     }
-    
-    return tmp_s;
+
+    return token;
 }
 
 void set_cors(httplib::Response& res) {
