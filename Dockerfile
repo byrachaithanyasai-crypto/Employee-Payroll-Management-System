@@ -13,9 +13,8 @@ COPY . .
 
 RUN chmod +x BUILD.bat RUN_SERVER.bat 2>/dev/null || true
 
-RUN g++ -std=c++17 -O2 -o payroll_backend \
-    main.cpp src/*.cpp \
-    -Iinclude
+RUN g++ -std=c++17 -O2 -Iinclude \
+    -o payroll_backend src/*.cpp
 
 EXPOSE 8080
 
