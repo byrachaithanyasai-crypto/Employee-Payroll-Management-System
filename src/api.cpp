@@ -16,11 +16,24 @@ extern std::vector<Attendance> attendanceRecords;
 extern std::vector<Payroll> payrollRecords;
 extern Settings appSettings;
 
-#include <windows.h>
-#include <bcrypt.h>
+
 
 std::unordered_map<std::string, std::string> activeSessions;
 
+std::string generateSessionToken() {
+    const char alphanum[] =
+        "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
+    std::string token(32, '0');
+
+    std::random_device rd;
+
+    for (int i = 0; i < 32; ++i) {
+        token[i] = alphanum[rd() % 62];
+    }
+
+    return token;
+}
 std::string generateSessionToken() {
     const char alphanum[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     std::string tmp_s(32, '0');
