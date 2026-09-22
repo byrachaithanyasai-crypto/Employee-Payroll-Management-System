@@ -128,7 +128,7 @@ void startApiServer(int port, std::map<std::string, User>& appUsers) {
     // --- DASHBOARD STATS ---
     svr.Get("/api/stats", [&](const httplib::Request& req, httplib::Response& res) {
         set_cors(res);
-        std::string role = get_role(req, appUsers);
+        std::string role = get_role(req, appUsers, nullptr);
         if (role.empty()) {
             res.status = 401;
             res.set_content(R"({"message":"Unauthorized"})", "application/json");
@@ -154,7 +154,7 @@ void startApiServer(int port, std::map<std::string, User>& appUsers) {
     // --- EMPLOYEES ---
     svr.Get("/api/employees", [&](const httplib::Request& req, httplib::Response& res) {
         set_cors(res);
-        std::string role = get_role(req, appUsers);
+        std::string role = get_role(req, appUsers, nullptr);
         if (role != "ADMIN" && role != "HR" && role != "MANAGER") {
             res.status = 403;
             res.set_content(R"({"message":"Administrator privileges required"})", "application/json");
@@ -177,7 +177,7 @@ void startApiServer(int port, std::map<std::string, User>& appUsers) {
 
     svr.Post("/api/employees", [&](const httplib::Request& req, httplib::Response& res) {
         set_cors(res);
-        std::string role = get_role(req, appUsers);
+        std::string role = get_role(req, appUsers, nullptr);
         if (role != "ADMIN" && role != "HR") {
             res.status = 403;
             res.set_content(R"({"message":"You do not have permission to perform this action."})", "application/json");
@@ -219,7 +219,7 @@ void startApiServer(int port, std::map<std::string, User>& appUsers) {
 
     svr.Put(R"(/api/employees/(\d+))", [&](const httplib::Request& req, httplib::Response& res) {
         set_cors(res);
-        std::string role = get_role(req, appUsers);
+        std::string role = get_role(req, appUsers, nullptr);
         if (role != "ADMIN" && role != "HR") {
             res.status = 403;
             res.set_content(R"({"message":"You do not have permission to perform this action."})", "application/json");
@@ -263,7 +263,7 @@ void startApiServer(int port, std::map<std::string, User>& appUsers) {
 
     svr.Delete(R"(/api/employees/(\d+))", [&](const httplib::Request& req, httplib::Response& res) {
         set_cors(res);
-        std::string role = get_role(req, appUsers);
+        std::string role = get_role(req, appUsers, nullptr);
         if (role != "ADMIN") {
             res.status = 403;
             res.set_content(R"({"message":"You do not have permission to perform this action."})", "application/json");
@@ -285,7 +285,7 @@ void startApiServer(int port, std::map<std::string, User>& appUsers) {
     // --- PAYROLL ---
     svr.Get("/api/payroll", [&](const httplib::Request& req, httplib::Response& res) {
         set_cors(res);
-        std::string role = get_role(req, appUsers);
+        std::string role = get_role(req, appUsers, nullptr);
         if (role != "ADMIN" && role != "HR" && role != "MANAGER") {
             res.status = 403;
             res.set_content(R"({"message":"You do not have permission to perform this action."})", "application/json");
@@ -312,7 +312,7 @@ void startApiServer(int port, std::map<std::string, User>& appUsers) {
 
     svr.Post("/api/payroll/process", [&](const httplib::Request& req, httplib::Response& res) {
         set_cors(res);
-        std::string role = get_role(req, appUsers);
+        std::string role = get_role(req, appUsers, nullptr);
         if (role != "ADMIN" && role != "HR") {
             res.status = 403;
             res.set_content(R"({"message":"You do not have permission to perform this action."})", "application/json");
@@ -351,7 +351,7 @@ void startApiServer(int port, std::map<std::string, User>& appUsers) {
     // --- USERS MANAGEMENT ---
     svr.Get("/api/users", [&](const httplib::Request& req, httplib::Response& res) {
         set_cors(res);
-        std::string role = get_role(req, appUsers);
+        std::string role = get_role(req, appUsers, nullptr);
         if (role != "ADMIN" && role != "HR" && role != "MANAGER") {
             res.status = 403;
             res.set_content(R"({"message":"You do not have permission to perform this action."})", "application/json");
@@ -371,7 +371,7 @@ void startApiServer(int port, std::map<std::string, User>& appUsers) {
 
     svr.Post("/api/users", [&](const httplib::Request& req, httplib::Response& res) {
         set_cors(res);
-        std::string role = get_role(req, appUsers);
+        std::string role = get_role(req, appUsers, nullptr);
         if (role != "ADMIN") {
             res.status = 403;
             res.set_content(R"({"message":"You do not have permission to perform this action."})", "application/json");
@@ -411,7 +411,7 @@ void startApiServer(int port, std::map<std::string, User>& appUsers) {
         set_cors(res);
         std::string targetUsername = req.matches[1];
         
-        std::string role = get_role(req, appUsers);
+        std::string role = get_role(req, appUsers, nullptr);
         if (role != "ADMIN") {
             res.status = 403;
             res.set_content(R"({"success":false, "message":"Administrator privileges required"})", "application/json");
@@ -449,7 +449,7 @@ void startApiServer(int port, std::map<std::string, User>& appUsers) {
     
     svr.Post("/api/settings", [&](const httplib::Request& req, httplib::Response& res) {
         set_cors(res);
-        std::string role = get_role(req, appUsers);
+        std::string role = get_role(req, appUsers, nullptr);
         if (role != "ADMIN") {
             res.status = 403;
             res.set_content(R"({"success":false, "message":"Administrator privileges required"})", "application/json");
