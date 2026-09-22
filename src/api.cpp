@@ -35,21 +35,6 @@ std::string generateSessionToken() {
     return token;
 }
 
-std::string generateSessionToken() {
-    const char alphanum[] =
-        "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-
-    std::string token(32, '0');
-
-    std::random_device rd;
-
-    for (int i = 0; i < 32; ++i) {
-        token[i] = alphanum[rd() % 62];
-    }
-
-    return token;
-}
-
 void set_cors(httplib::Response& res) {
     res.set_header("Access-Control-Allow-Origin", "*");
     res.set_header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
