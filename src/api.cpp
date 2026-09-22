@@ -67,6 +67,15 @@ void startApiServer(int port, std::map<std::string, User>& appUsers) {
         set_cors(res);
     });
 
+    // --- ROOT / HEALTH CHECK ---
+    svr.Get("/", [&](const httplib::Request&, httplib::Response& res) {
+    set_cors(res);
+    res.set_content(
+        R"({"status":"success","message":"Employee Payroll API is running"})",
+        "application/json"
+    );
+    });
+
     // --- AUTHENTICATION ---
     svr.Post("/api/login", [&](const httplib::Request& req, httplib::Response& res) {
         set_cors(res);
