@@ -18,4 +18,4 @@ RUN g++ -std=c++17 -O2 -Iinclude \
 
 EXPOSE 8080
 
-CMD ["./payroll_backend"]
+CMD ["./payroll_backend", "--server"]
